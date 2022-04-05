@@ -24,7 +24,7 @@ public class RaceBar {
 
   public static String start = "2021-10-19";
   public static String end = "2021-11-21";
-  public static SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd");
+  public static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
   public static String league = "nba";
   public static String stat = "pie";
   public static int nbPlayer = 10;
@@ -84,7 +84,7 @@ public class RaceBar {
             String name = obj.getFn()+" "+obj.getLn();
             Float value = obj.getPie();
             bars.add(new RaceBarLine(
-              name, value, dt.format(currentDate).replace("-",""),
+              name, value, dt.format(currentDate),
               lastValues.containsKey(name) ? lastValues.get(name) : value,
               i+1,
                 (int) obj.getTid()
