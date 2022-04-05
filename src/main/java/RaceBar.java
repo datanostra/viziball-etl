@@ -38,7 +38,7 @@ public class RaceBar {
   private void writeCsv(List<RaceBarLine> bars){
     File csvOutputFile = new File(CSV_FILE_NAME);
     try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-      pw.println("name,value,year,lastValue,rank");
+      pw.println("name,value,year,lastValue,rank,tid");
       bars.stream()
           .map(this::convertToCSV)
           .forEach(pw::println);
@@ -84,10 +84,10 @@ public class RaceBar {
             String name = obj.getFn()+" "+obj.getLn();
             Float value = obj.getPie();
             bars.add(new RaceBarLine(
-              name, value,
-              start,
+              name, value, dt.format(currentDate).replace("-",""),
               lastValues.containsKey(name) ? lastValues.get(name) : value,
-              i+1
+              i+1,
+                (int) obj.getTid()
             ));
             lastValues.put(name, value);
           }
