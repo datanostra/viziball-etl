@@ -23,7 +23,7 @@ import java.util.*;
 public class RaceBar {
 
   public static String start = "2021-10-19";
-  public static String end = "2021-11-21";
+  public static String end = "2022-05-04";
   public static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
   public static String league = "nba";
   public static String stat = "pie";
@@ -56,7 +56,7 @@ public class RaceBar {
 
     try {
       Date currentDate = dt.parse(start);
-      // TODO : Start with the first week to include players with 2-3 games
+      currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24 * 7)); // start with the first week to include players with 2-3 games
       Date endDate = dt.parse(end);
       do{
         System.out.println(currentDate);
@@ -87,7 +87,7 @@ public class RaceBar {
               name, value, dt.format(currentDate),
               lastValues.containsKey(name) ? lastValues.get(name) : value,
               i+1,
-                (int) obj.getTid()
+                obj.getHcl()
             ));
             lastValues.put(name, value);
           }

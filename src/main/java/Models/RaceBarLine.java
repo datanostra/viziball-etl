@@ -10,15 +10,15 @@ public class RaceBarLine {
   public String year;
   public Float lastValue;
   public int rank;
-  public int tid;
+  public String color;
 
-  public RaceBarLine(String name, Float value, String year, Float lastValue, int rank, int tid){
+  public RaceBarLine(String name, Float value, String year, Float lastValue, int rank, String color){
     this.name = name;
     this.value = value;
     this.year = year;
     this.lastValue = lastValue;
     this.rank = rank;
-    this.tid = tid;
+    this.color = color;
   }
 
   public String getName() {
@@ -61,17 +61,17 @@ public class RaceBarLine {
     this.rank = rank;
   }
 
-  public int getTid() {
-    return tid;
+  public String getColor() {
+    return color;
   }
 
-  public void setTid(int tid) {
-    this.tid = tid;
+  public void setColor(String Color) {
+    this.color = Color;
   }
 
 
   @Override
   public String toString(){
-    return String.join(",", Arrays.asList(this.name, this.value.toString(), this.year, this.lastValue.toString(), this.rank+"", this.tid+""));
+    return String.join(",", Arrays.asList(this.name, this.value.toString(), this.year, this.lastValue.toString(), this.rank+"", this.color));
   }
 }
