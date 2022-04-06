@@ -1,3 +1,4 @@
+import Models.Nationality;
 import Models.RaceBarLine;
 import Models.RankingObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,13 +24,15 @@ import java.util.*;
 public class RaceBar {
 
   public static String start = "2021-10-19";
-  public static String end = "2022-05-04";
+  public static String end = "2022-04-06";
   public static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
   public static String league = "nba";
   public static String stat = "pie";
+  public static String mode = "all";
   public static int nbPlayer = 10;
+  public static String nat = "europe";
 
-  public static String CSV_FILE_NAME = "race_bar_" + stat + "_" + league + ".csv";
+  public static String CSV_FILE_NAME = "race_bar_" + stat + "_" + league + "_" + nat + ".csv";
 
   public String convertToCSV(RaceBarLine bar) {
     return bar.toString();
@@ -49,7 +52,11 @@ public class RaceBar {
 
   public static void main(String[] args) {
 
-    // TODO : Add the team id
+    String nationalityArgs = nat;
+    if(nat.equals("europe")) nationalityArgs = String.join("-",new Nationality().europe);
+    if(nat.equals("all")) nationalityArgs = String.join("-",new Nationality().all);
+    if(!nationalityArgs.isEmpty())
+      nationalityArgs = "/"+nationalityArgs;
 
     Map<String,Float> lastValues = new HashMap<>();
     List<RaceBarLine> bars = new ArrayList<>();
@@ -67,12 +74,13 @@ public class RaceBar {
         try {
           HttpResponse response = httpclient.execute(new HttpGet(
               // TODO : set a minimum games (ratio of the number of iterations)
-              String.format("https://api.datanostra.app/ranking/player/%s/%s/%s/%s/1/%s/avg/DESC/0/48/0/100",
+              String.format("https://api.datanostra.app/ranking/player/%s/%s/%s/%s/1/%s/avg/DESC/0/48/0/100%s",
                   league,
                   start.replace("-",""),
                   dt.format(currentDate).replace("-",""),
                   stat,
-                  nbPlayer)
+                  nbPlayer,
+                  nationalityArgs)
           ));
           String responseBody = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
 
