@@ -24,13 +24,13 @@ import java.util.*;
 public class RaceBar {
 
   public static String start = "2021-10-19";
-  public static String end = "2022-04-06";
+  public static String end = "2022-04-11";
   public static SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
   public static String league = "nba";
   public static String stat = "pie";
   public static String mode = "all";
   public static int nbPlayer = 10;
-  public static String nat = "europe";
+  public static String nat = "";
 
   public static String CSV_FILE_NAME = "race_bar_" + stat + "_" + league + "_" + nat + ".csv";
 
